@@ -1,9 +1,0 @@
-基础性技术
-===
-
-* Netty
-
-* Thrift
-
-* Leader Election
-- ZooKeeper-based leader election

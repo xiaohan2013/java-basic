@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration scan="true" packagingData="true">
+
+    <!-- **　必须修改　日志保存的根路径与模块路径　** -->
+    <property name="log.base" value="E:/log"/>
+    <property name="log.moduleName" value="java-se"/>
+
+    <!-- TRACE, DEBUG, INFO, WARN, ERROR, ALL,OFF -->
+    <property name="root.level" value="DEBUG"/>
+    <property name="log.max.size" value="100MB"/>
+    <property name="log.max.history" value="60"/>
+    <property name="log.total.size" value="20GB"/>
+
+    <property name="console.pattern" value="%date{HH:mm:ss.SSS} %-5level [%thread] %logger{56}.%method\\(\\) L%L - %msg%n"/>
+    <property name="console.pattern.mdc" value="%date{HH:mm:ss.SSS} %-5level [%thread] %logger{56}.%method\\(\\) L%L - R:%X{requestId} S:%X{sessionId} I:%X{identity} %msg%n"/>
+    <property name="file.pattern" value="%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{56}.%method\\(\\) L%-4L - %msg%n"/>
+
+    <!-- 如果屏蔽控制台总是先打印logback自己的日志 -->
+    <statusListener class="ch.qos.logback.core.status.NopStatusListener" />
+
+    <!-- 控制台 appender-->
+    <appender name="CONSOLE_APPENDER" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${console.pattern}</pattern>
+            <charset>utf-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- RollingFileAppender -->
+    <appender name="FILE_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--<File>${log.base}/${log.moduleName}_%d{yyyy-MM-dd}.log</File>-->
+        <!-- 滚动策略：执行日志翻转，并负责将日志输出定向到实时文件 TimeBasedRollingPolicy -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${log.base}/${log.moduleName}/${log.moduleName}_%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+            <!-- 单个日志文件最大大小 -->
+            <maxFileSize>${log.max.size}</maxFileSize>
+            <!-- 归档日志最长保存多久，超过该天数的则删除，单位：天 -->
+            <maxHistory>${log.max.history}</maxHistory>
+            <!-- 归档日志总共可占多大空间，超过该空间时则删除最旧日志 -->
+            <totalSizeCap>${log.total.size}</totalSizeCap>
+        </rollingPolicy>
+        <!-- 额外的触发策略：定义日志翻转的触发条件，如一天中的时间、文件大小、外部事件、日志请求，或以上任意组合 -->
+        <!--<triggeringPolicy class=""></triggeringPolicy>-->
+        <encoder>
+            <charset>utf-8</charset>
+            <outputPatternAsHeader>true</outputPatternAsHeader>
+            <pattern>${file.pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- to use appender -->
+    <root level="${root.level}">
+        <appender-ref ref="CONSOLE_APPENDER"/>
+        <!--<appender-ref ref="FILE_APPENDER"/>-->
+    </root>
+</configuration>
