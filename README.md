@@ -8,6 +8,8 @@
 * Protobuf
   - RPC
   - 阻塞与非阻塞
+  - [!C++ RPC](https://blog.csdn.net/yangbindxj/article/details/125014277)
+  - 
 ```
 对于 protobuf-rpc-pro应用优化建议：
 1.配置JVM options
@@ -27,5 +29,7 @@
 ```
 
 * Leader Election
-- ZooKeeper-based leader election
+  - ZooKeeper-based leader election
+  - Raft-based 
+  - ETCD-based
 
