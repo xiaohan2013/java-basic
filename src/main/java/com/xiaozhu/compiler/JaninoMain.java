@@ -5,13 +5,9 @@ import org.codehaus.commons.compiler.CompilerFactoryFactory;
 import org.codehaus.commons.compiler.ICompiler;
 import org.codehaus.commons.compiler.util.ResourceFinderClassLoader;
 import org.codehaus.commons.compiler.util.resource.*;
-import org.codehaus.janino.CompilerFactory;
 import org.codehaus.janino.ExpressionEvaluator;
 import org.codehaus.janino.ScriptEvaluator;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +17,7 @@ public class JaninoMain {
     // 在Java中调用，且动态编译Java代码并加载
     public static void main(String[] args)  {
         try {
-            testCompiler();
+            testExpression();
         } catch (CompileException e) {
             throw new RuntimeException(e);
         } catch (InvocationTargetException e) {
@@ -86,10 +82,12 @@ public class JaninoMain {
         evaluator.setDebuggingInformation(true, true, true);
         evaluator.setParameters(new String[]{"param"}, new Class[]{Param.class});
         evaluator.setExpressionType(String.class);
-        evaluator.cook("param.getA() + param.getB()");
+//        evaluator.cook("param.getA()");
+//        evaluator.cook("param.toString()");
+        evaluator.cook("param.getb()");
         Param param = new Param();
         param.setA("a");
-        param.setB("B");
+        param.setB("b");
         String resultStr = (String) evaluator.evaluate(new Param[]{param});
         System.out.println(resultStr);
     }
@@ -99,15 +97,15 @@ public class JaninoMain {
         private String a;
         private String b;
 
-        public String getA() {
-            return a;
-        }
+//        public String getA() {
+//            return a;
+//        }
 
         public void setA(String a) {
             this.a = a;
         }
 
-        public String getB() {
+        public String getb() {
             return b;
         }
 
@@ -115,5 +113,9 @@ public class JaninoMain {
             this.b = b;
         }
 
+        @Override
+        public String toString() {
+            return "{a = "+a+", b = "+b+"}";
+        }
     }
 }
