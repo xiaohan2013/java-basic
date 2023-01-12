@@ -1,4 +1,4 @@
-package com.xiaozhu.akka;
+package com.xiaozhu.akka.rpc;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

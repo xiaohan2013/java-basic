@@ -1,4 +1,4 @@
-package com.xiaozhu.akka;
+package com.xiaozhu.akka.rpc;
 
 public class DemoServiceImpl implements DemoService{
     @Override
