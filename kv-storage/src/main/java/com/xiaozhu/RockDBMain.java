@@ -5,7 +5,7 @@ import org.rocksdb.RocksDB;
 import org.rocksdb.RocksDBException;
 import org.rocksdb.RocksIterator;
 
-public class Main {
+public class RockDBMain {
     static {
         RocksDB.loadLibrary();
     }
