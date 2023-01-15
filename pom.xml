@@ -11,6 +11,7 @@
     <modules>
         <module>sql-compiler</module>
         <module>kv-storage</module>
+        <module>algo-leetcode</module>
     </modules>
 
     <properties>
