@@ -8,11 +8,9 @@ public class AddBinaryMain {
 
         int a_i = 0;
         for (int i = a.length() - 1; i >= 0; i--) {
-            System.out.println(a.charAt(a.length() - i - 1));
             a_i += Math.pow(2, i) * Character.digit(a.charAt(a.length() - i - 1), 10);
         }
 
-        System.out.println(a_i);
 
         int b_i = 0;
         for (int i = b.length() - 1; i >= 0; i--) {
