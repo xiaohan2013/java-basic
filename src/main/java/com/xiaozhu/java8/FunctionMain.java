@@ -1,8 +1,6 @@
 package com.xiaozhu.java8;
 
-import java.util.Map;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 import java.util.function.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -118,6 +116,17 @@ public class FunctionMain {
         System.out.println(map);
     }
 
+    static void testMapFunc(){
+        List<Integer> list = Arrays.asList(1, 2, 3);
+        int[] array = list.stream().mapToInt(new ToIntFunction<Integer>() {
+            @Override
+            public int applyAsInt(Integer value) {
+                return value.intValue();
+            }
+        }).toArray();
+        System.out.println(array.length);
+    }
+
     public static void main(String[] args) {
         // 测试Consumer接口，其实就是定义一个函数
         testConsumer();
@@ -135,5 +144,8 @@ public class FunctionMain {
 
         // {love=4, too=3, I=1, you=3}
         testFunctionIdentity();
+
+        // mapToInt()、mapToLong()、mapToDouble()
+        testMapFunc();
     }
 }
