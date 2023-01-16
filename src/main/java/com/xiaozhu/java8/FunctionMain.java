@@ -1,13 +1,10 @@
 package com.xiaozhu.java8;
 
-import com.google.common.base.Function;
-
+import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
+import java.util.function.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class FunctionMain {
@@ -115,6 +112,12 @@ public class FunctionMain {
         System.out.println(value2);
     }
 
+    static void testFunctionIdentity(){
+        Stream<String> stream = Stream.of("I", "Love", "You", "too");
+        Map<String, Integer> map = stream.collect(Collectors.toMap(Function.identity(), String::length));
+        System.out.println(map);
+    }
+
     public static void main(String[] args) {
         // 测试Consumer接口，其实就是定义一个函数
         testConsumer();
@@ -129,5 +132,8 @@ public class FunctionMain {
         testOptional();
 
         testFunction();
+
+        // {love=4, too=3, I=1, you=3}
+        testFunctionIdentity();
     }
 }
